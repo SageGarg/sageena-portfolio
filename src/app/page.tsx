@@ -3,34 +3,41 @@ import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 /* ------------------------------------------------------------
-   Build MANY random shards so the screen really looks shattered
+   Deterministic shard generator (no hydration mismatch!)
+   We avoid Math.random at render‑time so SSR and client match.
 -------------------------------------------------------------*/
 const SHARD_COUNT = 40;
 
-type Shard = {
-  clip: string; // CSS clip‑path defining the shape
-  dx: number;   // x translation target (px)
-  dy: number;   // y translation target (px)
-  rot: number;  // rotation target (deg)
+// simple deterministic pseudo‑random based on index
+const prand = (i: number) => {
+  // returns [0,1)
+  const x = Math.sin(i * 12.9898 + 78.233) * 43758.5453;
+  return x - Math.floor(x);
 };
 
-const rand = (min: number, max: number) => Math.random() * (max - min) + min;
-
-const makePoly = (): string => {
-  // 4‑point irregular quad inside 0–100% square
-  const pts = Array.from({ length: 4 }, () => `${rand(0, 100)}% ${rand(0, 100)}%`).join(', ');
+const makePoly = (i: number): string => {
+  const pts = Array.from({ length: 4 }, (_, j) => {
+    const r1 = prand(i * 4 + j);
+    const r2 = prand(i * 4 + j + SHARD_COUNT);
+    return `${(r1 * 100).toFixed(3)}% ${(r2 * 100).toFixed(3)}%`;
+  }).join(', ');
   return `polygon(${pts})`;
 };
 
-const buildShards = (n: number): Shard[] => {
-  return Array.from({ length: n }, () => {
-    const sign = Math.random() < 0.5 ? -1 : 1;
-    return {
-      clip: makePoly(),
-      dx: sign * rand(80, 260),
-      dy: (Math.random() < 0.5 ? -1 : 1) * rand(80, 260),
-      rot: sign * rand(60, 140),
-    };
+type Shard = {
+  clip: string;
+  dx: number;
+  dy: number;
+  rot: number;
+};
+
+const buildShards = (): Shard[] => {
+  return Array.from({ length: SHARD_COUNT }, (_, i) => {
+    const sign = prand(i) < 0.5 ? -1 : 1;
+    const dx = sign * (80 + prand(i + 1) * 180);          // 80‑260 px
+    const dy = (prand(i + 2) < 0.5 ? -1 : 1) * (80 + prand(i + 3) * 180);
+    const rot = sign * (60 + prand(i + 4) * 80);          // 60‑140 deg
+    return { clip: makePoly(i), dx, dy, rot };
   });
 };
 
@@ -38,16 +45,17 @@ type Phase = 'welcome' | 'breaking' | 'done';
 
 export default function Home() {
   const [phase, setPhase] = useState<Phase>('welcome');
-  const SHARDS = useMemo(() => buildShards(SHARD_COUNT), []);
+  // deterministic shards (same on server + client)
+  const SHARDS = useMemo(buildShards, []);
 
   /* ---------------- timeline ---------------- */
   useEffect(() => {
     if (phase === 'welcome') {
-      const id = setTimeout(() => setPhase('breaking'), 3000);
+      const id = setTimeout(() => setPhase('breaking'), 1900);
       return () => clearTimeout(id);
     }
     if (phase === 'breaking') {
-      const id = setTimeout(() => setPhase('done'), 1700);
+      const id = setTimeout(() => setPhase('done'), 1400);
       return () => clearTimeout(id);
     }
   }, [phase]);
@@ -92,7 +100,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.05, transition: { duration: 0.4 } }}
-                className="z-10 select-none text-3xl sm:text-8xl md:text-9xl font-extrabold tracking-widest bg-gradient-to-r from-indigo-900 via-purple-900 to-rose-700 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
+                className="z-10 select-none text-4xl sm:text-4xl md:text-4xl font-extrabold tracking-widest bg-gradient-to-r from-indigi-900 via-purple-900 to-rose-700 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
               >
                 Welcome
               </motion.h2>
