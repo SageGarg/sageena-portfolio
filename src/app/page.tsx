@@ -100,7 +100,7 @@ export default function Home() {
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 1.05, transition: { duration: 0.4 } }}
-                className="z-10 select-none text-4xl sm:text-4xl md:text-4xl font-extrabold tracking-widest bg-gradient-to-r from-indigi-900 via-purple-900 to-rose-700 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
+                className="z-10 select-none text-6xl sm:text-6xl md:text-8xl font-extrabold tracking-widest bg-gradient-to-r from-indigo-900 via-purple-900 to-rose-700 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
               >
                 Welcome
               </motion.h2>
