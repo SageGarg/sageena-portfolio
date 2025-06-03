@@ -127,8 +127,7 @@ export default function Home() {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-lg text-lg text-gray-600 dark:text-gray-300"
           >
-            CS sophomore&nbsp;•&nbsp;LLM tinkerer&nbsp;•&nbsp;Android&nbsp;&amp;&nbsp;Full‑Stack dev.
-            <br />Here’s my work.
+            *still working on one liner*
           </motion.p>
 
           <motion.div
