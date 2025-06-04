@@ -1,12 +1,13 @@
 'use client';
 import { useEffect, useState, useMemo } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-
+import Link from 'next/link';
 /* ------------------------------------------------------------
    Deterministic shard generator (no hydration mismatch!)
    We avoid Math.random at render‑time so SSR and client match.
 -------------------------------------------------------------*/
 const SHARD_COUNT = 40;
+
 
 // simple deterministic pseudo‑random based on index
 const prand = (i: number) => {
@@ -42,6 +43,7 @@ const buildShards = (): Shard[] => {
 };
 
 type Phase = 'welcome' | 'breaking' | 'done';
+const chips = ['About', 'Experience', 'Accolades', 'Hire Me', 'Contact'];
 
 export default function Home() {
   const [phase, setPhase] = useState<Phase>('welcome');
@@ -149,7 +151,33 @@ export default function Home() {
               Download Résumé
             </a>
           </motion.div>
+
+          
+
+
+<motion.div
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ delay: 1.2, duration: 0.6 }}
+      className="flex flex-wrap justify-center gap-3 text-sm"
+    >
+      {chips.map((label) => (
+        <Link
+          key={label}
+          href={`/${label.toLowerCase()}`}     // → /about, /experience, …
+          className="rounded-full border px-3 py-1 text-gray-600 hover:bg-pink-50
+                     dark:text-gray-300 dark:hover:bg-zinc-800/50"
+        >
+          {label}
+        </Link>
+      ))}
+    </motion.div>
+
+
+
         </section>
+
+        
       )}
     </>
   );
