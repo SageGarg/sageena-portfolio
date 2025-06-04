@@ -133,12 +133,12 @@ useEffect(() => {
 
       {/* ================= Hero ================= */}
       {phase === 'done' && (
-        <section className="flex min-h-screen flex-col items-center justify-center gap-6 text-center bg-black">
+        <section className="flex min-h-screen flex-col items-center justify-center gap-6 text-center bg-black dark:bg-black">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6 }}
-            className="text-6xl sm:text-7xl font-extrabold tracking-tight"
+            className="text-6xl sm:text-7xl font-extrabold tracking-tight text-white"
           >
             Hi, I’m <span className="text-pink-700">Sageena&nbsp;Garg</span>
           </motion.h1>
