@@ -17,7 +17,7 @@ export const projects: Array<Project & { category: string }> = [
     title: 'Signal Verse',
     blurb: 'LLM-powered Q&A for traffic-signal engineers.',
     stack: ['Python', 'LangChain', 'MySQL'],
-    repo: 'https://gitlab.com/org/signalverse?ref=SageenaGarg',
+    repo: 'https://github.com/SageGarg/signalVerse',
     demo: 'http://trafficsignalverse.com/',
     image: '/images/signalverse.png',
   },
