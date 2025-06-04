@@ -45,10 +45,22 @@ const buildShards = (): Shard[] => {
 type Phase = 'welcome' | 'breaking' | 'done';
 const chips = ['About', 'Experience', 'Accolades', 'Hire Me', 'Contact'];
 
+const introAlreadyPlayed = () =>
+  typeof window !== 'undefined' && sessionStorage.getItem('introPlayed') === 'true';
+
+
 export default function Home() {
   const [phase, setPhase] = useState<Phase>('welcome');
   // deterministic shards (same on server + client)
   const SHARDS = useMemo(buildShards, []);
+
+// skip welcome effect if once played
+useEffect(() => {
+    if (introAlreadyPlayed()) {
+      setPhase('done');
+    }
+  }, []);
+
 
   /* ---------------- timeline ---------------- */
   useEffect(() => {
@@ -59,6 +71,13 @@ export default function Home() {
     if (phase === 'breaking') {
       const id = setTimeout(() => setPhase('done'), 1400);
       return () => clearTimeout(id);
+    }
+  }, [phase]);
+
+  /* 5️⃣  once we hit 'done' for the first time, remember it */
+  useEffect(() => {
+    if (phase === 'done' && !introAlreadyPlayed()) {
+      sessionStorage.setItem('introPlayed', 'true');
     }
   }, [phase]);
 
