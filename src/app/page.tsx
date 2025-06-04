@@ -50,6 +50,7 @@ const introAlreadyPlayed = () =>
 
 
 export default function Home() {
+
   const [phase, setPhase] = useState<Phase>('welcome');
   // deterministic shards (same on server + client)
   const SHARDS = useMemo(buildShards, []);
@@ -132,7 +133,7 @@ useEffect(() => {
 
       {/* ================= Hero ================= */}
       {phase === 'done' && (
-        <section className="flex min-h-screen flex-col items-center justify-center gap-6 text-center">
+        <section className="flex min-h-screen flex-col items-center justify-center gap-6 text-center bg-black">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
