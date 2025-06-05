@@ -1,98 +1,115 @@
-// src/app/(site)/projects/page.tsx
-'use client';
-
-import { projects, Project } from '@/content/projects';
-import Link from 'next/link';
-import Image from 'next/image';
-import { useMemo } from 'react';
-
-export default function ProjectsPage() {
-  const grouped = useMemo(() => {
-    return projects.reduce<Record<string, Project[]>>((acc, p) => {
-      if (!acc[p.category]) acc[p.category] = [];
-      acc[p.category].push(p);
-      return acc;
-    }, {});
-  }, []);
-
+"use client";
+import { useEffect, useRef } from "react";
+import { gsap } from "gsap";
+import { Projects } from "@/content/projects";
+export default function ProjectsList() {
   return (
-    <div className="space-y-16 px-4 py-12">
-      {Object.entries(grouped).map(([category, list]) => (
-        <section key={category}>
-          <h2 className="mb-6 text-3xl font-bold">{category}</h2>
-          <div className="flex flex-col gap-4">
-            {list.map((p) => (
-              <ProjectBar key={p.slug} project={p} />
-            ))}
-          </div>
-        </section>
-      ))}
-    </div>
+    <>
+      {Projects.map((project, index) => {
+        return (
+          <section key={index} className="my-24">
+            <section className="container mx-auto p-4">
+              <h1 className="font-bold text-xl text-primary">
+                {project.sectionTitle}
+              </h1>
+            </section>
+            {project.data.map((val, key) => {
+              return <Comp key={key} val={val}></Comp>;
+            })}
+          </section>
+        );
+      })}
+    </>
   );
 }
 
-function ProjectBar({ project }: { project: Project }) {
-  return (
-    <div
-      className="relative group overflow-hidden rounded-lg bg-gray-100 dark:bg-zinc-800
-                 transition-all duration-300 hover:bg-gray-200 dark:hover:bg-zinc-700"
-      // give a smooth height transition:
-      style={{ transitionProperty: 'background-color, max-height' }}
-    >
-      {/* 1. Always-visible row */}
-      <div className="flex items-center justify-between px-4 py-2">
-        <span className="font-medium">{project.title}</span>
-        <span className="text-xs text-gray-500 dark:text-gray-400">
-          {project.stack.join(' • ')}
-        </span>
-      </div>
-
-      {/* 2. Hidden content container */}
-      <div
-        className="overflow-hidden max-h-0 group-hover:max-h-90 transition-all duration-300"
-      >
-        <div className="p-4">
-          {/* Project image */}
-          <div className="mb-4 w-full max-w-sm overflow-hidden rounded-md">
-            <Image
-              src={project.image}
-              alt={project.title}
-              width={400}
-              height={225}
-              className="object-cover"
-            />
-          </div>
-
-          {/* Buttons */}
-          <div className="flex flex-wrap justify-center gap-4">
-            {project.demo ? (
-              <Link
-                href={project.demo}
-                target="_blank"
-                rel="noreferrer"
-                className="rounded bg-pink-700 px-4 py-2 text-sm font-medium text-white hover:bg-pink-600"
-              >
-                Live Demo
-              </Link>
-            ) : null}
-
-            <Link
-              href={project.repo}
-              target="_blank"
-              rel="noreferrer"
-              className="rounded border border-pink-700 px-4 py-2 text-sm font-medium
-                         text-pink-700 hover:bg-pink-50 dark:hover:bg-zinc-800/50"
-            >
-              View Code
-            </Link>
-          </div>
-
-          {/* One-sentence blurb */}
-          <p className="mt-3 max-w-sm text-center text-sm text-gray-600 dark:text-gray-400">
-            {project.blurb}
-          </p>
-        </div>
+function Comp(props: {
+  val:
+    | {
+        title: string;
+        hoverTitle: string;
+        subTitle: string;
+        notBlank?: boolean;
+        link: string;
+        image?: string;
+        demo?: string;
+      }
+    | {
+        title: string;
+        hoverTitle: string;
+        link: string;
+        notBlank?: boolean;
+        subTitle?: undefined;
+        image?: string;
+        demo?: string;
+      };
+}) {
+  const compRef = useRef<HTMLAnchorElement>(null);
+  useEffect(() => {
+    let ctx = gsap.context(() => {
+      gsap.from(compRef.current, {
+        yPercent: 100,
+        opacity: 0,
+        ease: "power4.out",
+        duration: 1,
+        scrollTrigger: {
+          trigger: compRef.current,
+          start: "top 100%",
+          end: "bottom top",
+          // scrub:true,
+          // markers:true
+        },
+      });
+    });
+    return () => ctx.revert(); // cleanup!
+  }, []);
+  return (<a
+  ref={compRef}
+  href={props.val.link}
+  target={props.val.notBlank ? "" : "_blank"}
+  className="info-tile px-4 md:px-8 block overflow-hidden group border-b-2 border-text/10 cursor-pointer relative after:absolute after:w-full after:h-full after:top-0 after:left-0 after:bg-pink-700 after:origin-bottom hover:after:origin-top after:-z-10 after:duration-500 after:transition-transform after:scale-y-0 hover:after:scale-y-100"
+>
+  <div className="container relative mx-auto flex justify-between items-center">
+    {/* Left section: Title & Hover Title */}
+    <div className="h-full flex-1 relative overflow-hidden">
+      <h1 className="text-xl md:text-5xl lg:text-7xl font-bold tracking-tighter py-12 transition-transform duration-500 group-hover:-translate-y-full">
+        {props.val.title}
+      </h1>
+      <div className="absolute inset-0 flex flex-col justify-center translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+        <h1 className="text-xl md:text-5xl lg:text-7xl font-bold tracking-tighter">
+          {props.val.title}
+        </h1>
+        <h2 className="text-lg md:text-2xl lg:text-3xl font-medium opacity-70">
+          {props.val.hoverTitle}
+        </h2>
       </div>
     </div>
+
+    {/* Right: Image and Subtitle */}
+    <div className="flex items-center gap-4">
+      {/* Image (no inner <a>) */}
+      {props.val.image && (
+        <div
+          onClick={(e) => {
+            e.stopPropagation();
+            window.open(props.val.demo, "_blank");
+          }}
+          className="w-48 h-24 md:h-32 lg:h-28 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer"
+        >
+          <img
+            src={props.val.image}
+            alt={props.val.title}
+            className="object-cover h-full w-full rounded"
+          />
+        </div>
+      )}
+      {/* Subtitle */}
+      <p className="text-text/70 opacity-0 group-hover:opacity-70 transition-opacity duration-500 text-xs md:text-base max-w-xs lg:max-w-md">
+        {props.val.subTitle}
+      </p>
+    </div>
+  </div>
+</a>
+
   );
 }
