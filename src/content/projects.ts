@@ -9,7 +9,7 @@ export const Projects = [
                 hoverTitle: "Flask based LLM",
                 subTitle: "Revolutionizing healthcare with AI-powered consultations and secure, decentralized medical data management.",
                 image: "/images/signalverse.png",
-                link: "https://github.com/nytrixis/Dhanvantari/",
+                link: "https://github.com/SageGarg/signalVerse",
                 demo: "http://trafficsignalverse.com/"
             },
             {
