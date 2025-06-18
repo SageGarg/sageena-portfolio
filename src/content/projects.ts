@@ -1,52 +1,70 @@
-
 export const Projects = [
-    {
-        sectionTitle: "Web Development Projects",
-        data: [
-            {
-                category: 'AI',
-                title: 'SIGNAL VERSE',
-                hoverTitle: "Flask based LLM",
-                subTitle: "Revolutionizing healthcare with AI-powered consultations and secure, decentralized medical data management.",
-                image: "/images/signalverse.png",
-                link: "https://github.com/SageGarg/signalVerse",
-                demo: "http://trafficsignalverse.com/"
-            },
-            {
-                title: "POOZLE",
-                hoverTitle: "E-COMMERCE WEBSITE",
-                subTitle: "MERN implemented Shopping Website with an integrated admin panel, Fashion AI chatbot, try on feature and videos section.",
-                link: "https://github.com/nytrixis/WeforShe24"
-            },
-            {
-                title: "SKYCAST",
-                hoverTitle: "WEATHER WEBAPP",
-                subTitle: "Real Time weather magic with corresponding background changes.",
-                link: "https://github.com/nytrixis/SkyCast"
-            },
-            {
-                title: "SNAPLINK",
-                hoverTitle: "CHROME EXTENSION",
-                subTitle: "Queue in your links for future viewing.",
-                link: "https://github.com/nytrixis/SnapLink/"
-            },
-            {
-                title: "STARFLIX",
-                hoverTitle: "ML PROJECT",
-                subTitle: "Exploring celestial formations through ML",
-                link: "https://github.com/nytrixis/StarFlix/"
-            },
-            {
-                title: "PORTFOLIO SITE",
-                hoverTitle: "RECURSION",
-                subTitle: "A hub of all my skills and projects.",
-                link: "",
-            },
-            {
-                title: "MORE PROJECTS...",
-                hoverTitle: "GITHUB PAGE",
-                link: "https://github.com/nytrixis/"
-            },
-        ]
-    },
+  {
+    sectionTitle: "Web Development Projects",
+    data: [
+      {
+        category: "AI",
+        title: "SIGNAL VERSE",
+        hoverTitle: "Flask based LLM",
+        subTitle:
+          "Revolutionizing healthcare with AI-powered consultations and secure, decentralized medical data management.",
+        image: "/images/signalverse.png",
+        link: "https://github.com/SageGarg/signalVerse",
+        demo: "http://trafficsignalverse.com/",
+      },
+      {
+        category: "AI + Traffic Engineering",
+        title: "CCI Phase 2",
+        hoverTitle: "Automated CV & Analytics Yellow-Light Insight Engine",
+        subTitle:
+          "OpenCV-driven yellow-light detection, multi-camera clip stitching, and polynomial regression on vehicle trajectories to optimize signal timing and improve intersection safety.",
+        
+        // image: "/images/yellowlight.png",
+        link: "https://github.com/SageGarg/cciPhase2",
+        demo: "",
+      },
+      {
+        category: "Mobile",
+        title: "TRAVELMATE APP",
+        hoverTitle: "Android Trip Planner",
+        subTitle:
+          "Single-activity Android application with trip gallery, real-time WebSocket chat, and integrated weather widgets.",
+        image: "/images/travelmate-android.png",
+        link: "https://github.com/SageGarg/TravelMateApp",
+        demo: "https://youtu.be/yBcNq37_ZDU?si=3br8Pv1m8-LNQzIl",
+      },
+      {
+        category: "Web & Full-Stack",
+        title: "TRIP ATLAS WEB",
+        hoverTitle: "Full-Stack Travel Website",
+        subTitle:
+          "Full-stack travel-planning platform built with React, Tailwind CSS frontend and Express/MongoDB backend.",
+        image: "/images/travelmate-web.png",
+        link: "https://github.com/SageGarg/TripAtlas",
+        demo: "",
+      },
+
+      {
+        category: "Web & Full-Stack",
+        title: "EDU MART",
+        hoverTitle: "Course Catalog Web App",
+        subTitle:
+          "A React-based course shopping platform with search, filtering, cart, and payment flow (frontend only, no backend).",
+        notBlank: true,
+        link: "https://github.com/SageGarg/EduMart",
+        image: "/images/edumart.png", // Replace with your actual image path
+        demo: "https://edumart-demo.vercel.app/", // Replace with your actual deployed demo link
+      },
+      {
+        category: "Web & Full-Stack",
+        title: "MOVIE MAZE",
+        hoverTitle: "Movie Listing Website",
+        subTitle:
+          "A frontend movie directory with search, category filtering (Thriller, Romantic Comedy, Horror), and feedback interface. Built with HTML, CSS, and JavaScript.",
+        link: "https://github.com/SageGarg/MovieMaze", // Replace with your actual GitHub repo link
+        demo: "https://your-deployed-site-link.com", // Replace with your live demo link if deployed
+        image: "/images/moviemaze.png", // Replace with actual image path you’re using
+      },
+    ],
+  },
 ];

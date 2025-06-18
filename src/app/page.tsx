@@ -43,7 +43,7 @@ const buildShards = (): Shard[] => {
 };
 
 type Phase = 'welcome' | 'breaking' | 'done';
-const chips = ['About', 'Experience', 'Accolades', 'Hire Me', 'Contact'];
+const chips = ['About', 'Experience', 'Accolades', 'Hire', 'Contact'];
 
 const introAlreadyPlayed = () =>
   typeof window !== 'undefined' && sessionStorage.getItem('introPlayed') === 'true';
@@ -149,7 +149,7 @@ useEffect(() => {
             transition={{ delay: 0.2, duration: 0.6 }}
             className="max-w-lg text-lg text-gray-600 dark:text-gray-300"
           >
-            *still working on one liner*
+            AI Researcher • Learning Cloud • Full-Stack Developer
           </motion.p>
 
           <motion.div
