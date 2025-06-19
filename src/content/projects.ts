@@ -11,6 +11,7 @@ export const Projects = [
         image: "/images/signalverse.png",
         link: "https://github.com/SageGarg/signalVerse",
         demo: "http://trafficsignalverse.com/",
+        stack: ['Python','Flask','Langchain']
       },
       {
         category: "AI + Traffic Engineering",
@@ -22,6 +23,7 @@ export const Projects = [
         // image: "/images/yellowlight.png",
         link: "https://github.com/SageGarg/cciPhase2",
         demo: "",
+        stack: ['Python', 'OpenCV', 'TensorFlow' ]
       },
       {
         category: "Mobile",
@@ -32,6 +34,7 @@ export const Projects = [
         image: "/images/travelmate-android.png",
         link: "https://github.com/SageGarg/TravelMateApp",
         demo: "https://youtu.be/yBcNq37_ZDU?si=3br8Pv1m8-LNQzIl",
+        stack: ['Python', 'OpenCV', 'TensorFlow' ]
       },
       {
         category: "Web & Full-Stack",
@@ -42,6 +45,7 @@ export const Projects = [
         image: "/images/travelmate-web.png",
         link: "https://github.com/SageGarg/TripAtlas",
         demo: "",
+        stack: ['React', 'Tailwind', 'MongoDB' ]
       },
 
       {
@@ -54,6 +58,7 @@ export const Projects = [
         link: "https://github.com/SageGarg/EduMart",
         image: "/images/edumart.png", // Replace with your actual image path
         demo: "https://edumart-demo.vercel.app/", // Replace with your actual deployed demo link
+        stack: ['React', 'Node' ]
       },
       {
         category: "Web & Full-Stack",
@@ -64,6 +69,7 @@ export const Projects = [
         link: "https://github.com/SageGarg/MovieMaze", // Replace with your actual GitHub repo link
         demo: "https://your-deployed-site-link.com", // Replace with your live demo link if deployed
         image: "/images/moviemaze.png", // Replace with actual image path you’re using
+        stack: ['HTML', 'CSS', 'Javascript' ]
       },
     ],
   },
