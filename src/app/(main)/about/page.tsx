@@ -1,8 +1,8 @@
-"use client";
-import { useState } from "react";
-import Link from "next/link";
-import { motion } from "framer-motion";
-import { Projects } from "@/content/projects";
+'use client';
+import { useState } from 'react';
+import Link from 'next/link';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Projects } from '@/content/projects';
 
 export default function About() {
   // Flatten all project entries
@@ -32,56 +32,58 @@ export default function About() {
         <div className="mt-6 md:mt-0">
           <h1 className="text-4xl font-bold">About Me</h1>
           <p className="mt-4 max-w-xl text-gray-700 dark:text-gray-300">
-            Hi, I’m Sageena Garg—a CS junior at Iowa State University working as an undergrad research assistant building AI-powered
-            traffic-engineering tools and seamless mobile experiences. I love
-            turning complex data into intuitive apps and learning cloud
-            technologies along the way.
+            I’m Sageena Garg, a junior studying Computer Science at Iowa State
+            University. I work as an undergrad research assistant, where I build
+            AI tools and mobile apps. I’ve made Android projects, full-stack web
+            apps with React and Node.js, and I’m always learning new cloud
+            services to power my work.
           </p>
         </div>
       </div>
 
-      {/* skills section */}
-
       {/* Interactive Skills & Proof */}
-      <div className="mt-12">
-        <h2 className="mb-6 text-2xl font-semibold">Skills & Proof</h2>
-        <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
-          {Object.entries(skillMap).map(([skill, list]) => {
-            const isOpen = openSkill === skill;
-            return (
-              <div
-                key={skill}
-                className="relative overflow-visible"
-                onMouseEnter={() => setOpenSkill(skill)}
-                onMouseLeave={() => setOpenSkill(null)}
-              >
-                {/* badge */}
-                <span className="inline-block rounded-full bg-pink-100 px-3 py-1 text-sm font-medium text-pink-700 cursor-pointer">
-                  {skill}
-                </span>
+         <div className="mt-12">
+      <h2 className="mb-6 text-2xl font-semibold">Skill Set</h2>
+      <div className="flex flex-wrap gap-4">
+        {Object.entries(skillMap).map(([skill, list]) => {
+          const isOpen = openSkill === skill;
+          return (
+            <div
+              key={skill}
+              className="relative"
+              onMouseEnter={() => setOpenSkill(skill)}
+              onMouseLeave={() => setOpenSkill(null)}
+            >
+              {/* skill badge */}
+              <button className="rounded-full bg-pink-100 px-4 py-1 text-sm font-semibold text-pink-700 hover:scale-105 transition">
+                {skill}
+              </button>
 
-                {/* popover panel */}
+              {/* hover panel */}
+              <AnimatePresence>
                 {isOpen && (
                   <motion.div
                     initial={{ opacity: 0, y: 8 }}
                     animate={{ opacity: 1, y: 0 }}
                     exit={{ opacity: 0, y: 8 }}
                     transition={{ duration: 0.2 }}
-                    className="absolute left-1/2 top-full z-10 w-48 -translate-x-1/2 
-                             mt-2 rounded-md border border-gray-200 bg-white dark:border-zinc-700 dark:bg-zinc-800 
-                             p-2 shadow-lg"
+                    className="absolute left-1/2 top-full z-20 mt-2 w-56 -translate-x-1/2 
+                               bg-white/90 dark:bg-zinc-800/90 backdrop-blur-sm rounded-lg 
+                               shadow-lg p-4"
                   >
-                    <p className="mb-1 text-xs font-medium text-gray-500 dark:text-gray-400">
+                    {/* little arrow */}
+                    <div className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 
+                                    w-3 h-3 rotate-45 bg-white dark:bg-zinc-800" />
+
+                    <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
                       Used in:
                     </p>
-                    <ul className="space-y-1">
-                      {list.map((p) => (
+                    <ul className="mt-2 space-y-1 text-sm">
+                      {list.map(p => (
                         <li key={p.title}>
                           <Link
-                            href={`/projects#${p.title
-                              .toLowerCase()
-                              .replace(/\s+/g, "-")}`}
-                            className="text-sm text-pink-700 hover:underline"
+                            href={`/projects#${p.title.toLowerCase().replace(/\s+/g, '-')}`}
+                            className="text-pink-700 hover:underline"
                           >
                             {p.title}
                           </Link>
@@ -90,19 +92,18 @@ export default function About() {
                     </ul>
                   </motion.div>
                 )}
-              </div>
-            );
-          })}
-        </div>
+              </AnimatePresence>
+            </div>
+          );
+        })}
       </div>
+    </div>
 
       {/* 5. Education */}
       <div>
         <h2 className="mb-4 text-2xl font-semibold">Education</h2>
         <p className="text-gray-700 dark:text-gray-300">
-          B.Sc. Computer Science, Iowa State University
-          <br />
-          Expected December 2026 • GPA: 3.72/4.0
+          B.Sc. Computer Science, Iowa State University &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Expected December 2026 • GPA: 3.72 / 4.0
         </p>
       </div>
 
