@@ -1,4 +1,3 @@
-// src/app/(site)/experience/page.tsx
 'use client';
 
 import { motion } from 'framer-motion';

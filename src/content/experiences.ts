@@ -14,7 +14,7 @@ export const professionalExperiences: Experience[] = [
     role: 'Undergrad Research Assistant',
     company: 'Iowa State University Research Park',
     location: 'Iowa State University',
-    dates: 'May 2024 – Present',
+    dates: 'Feb 2024 – Present',
     responsibilities: [
       'Built RAG pipelines with LangChain and MySQL for document Q&A',
       'Developed Flask microservices and integrated OpenAI APIs',
@@ -27,7 +27,7 @@ export const professionalExperiences: Experience[] = [
     role: 'Teaching Assistant',
     company: 'Dept. of Computer Science',
     location: 'Iowa State University',
-    dates: 'May 2024 – Present',
+    dates: 'Dec 2023 – May 2024',
     responsibilities: [
       'Built RAG pipelines with LangChain and MySQL for document Q&A',
       'Developed Flask microservices and integrated OpenAI APIs',
