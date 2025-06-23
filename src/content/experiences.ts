@@ -22,6 +22,20 @@ export const professionalExperiences: Experience[] = [
     skills: ['Python', 'Flask', 'LangChain', 'MySQL'],
     link: '/projects#signal-verse',
   },
+  {
+    role: 'Student Office Assistant',
+    company: 'International Students & Scholars Office',
+    location: 'Iowa State University',
+    dates: 'Jan 2025 – Present',
+    responsibilities: [
+      'Provide accurate, organized, and confidential administrative support, enhancing database integrity and system performance.',
+      'Communicate effectively with individuals from diverse cultural, social, linguistic, and national backgrounds.',
+    ],
+    skills: ['Administrative Support',
+  'Data Management',
+  'Communication', 'Customer Service'],
+    // link: '/projects#signal-verse',
+  },
 
   {
     role: 'Teaching Assistant',
@@ -29,11 +43,11 @@ export const professionalExperiences: Experience[] = [
     location: 'Iowa State University',
     dates: 'Dec 2023 – May 2024',
     responsibilities: [
-      'Built RAG pipelines with LangChain and MySQL for document Q&A',
-      'Developed Flask microservices and integrated OpenAI APIs',
+      'Led coding help sessions for COMS 1040 (Introduction to Programming - Python) and COMS 1130 (Spreadsheets and Databases), mentoring students in Python.',
+      'In COMS 1130 course, guided students in effectively using MS Office tools—Access, Excel, and Word.',
     ],
-    skills: ['Python', 'Flask', 'LangChain', 'MySQL'],
-    link: '/projects#signal-verse',
+    skills: ['Python', 'MS Excel', 'MS Access'],
+    // link: '/projects#signal-verse',
   },
   // …add more professional roles…
 ];
