@@ -1,13 +1,12 @@
-'use client';
-import { useEffect, useState, useMemo } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import Link from 'next/link';
+"use client";
+import { useEffect, useState, useMemo } from "react";
+import { motion, AnimatePresence } from "framer-motion";
+import Link from "next/link";
 /* ------------------------------------------------------------
    Deterministic shard generator (no hydration mismatch!)
    We avoid Math.random at render‑time so SSR and client match.
 -------------------------------------------------------------*/
 const SHARD_COUNT = 40;
-
 
 // simple deterministic pseudo‑random based on index
 const prand = (i: number) => {
@@ -21,7 +20,7 @@ const makePoly = (i: number): string => {
     const r1 = prand(i * 4 + j);
     const r2 = prand(i * 4 + j + SHARD_COUNT);
     return `${(r1 * 100).toFixed(3)}% ${(r2 * 100).toFixed(3)}%`;
-  }).join(', ');
+  }).join(", ");
   return `polygon(${pts})`;
 };
 
@@ -35,50 +34,48 @@ type Shard = {
 const buildShards = (): Shard[] => {
   return Array.from({ length: SHARD_COUNT }, (_, i) => {
     const sign = prand(i) < 0.5 ? -1 : 1;
-    const dx = sign * (80 + prand(i + 1) * 180);          // 80‑260 px
+    const dx = sign * (80 + prand(i + 1) * 180); // 80‑260 px
     const dy = (prand(i + 2) < 0.5 ? -1 : 1) * (80 + prand(i + 3) * 180);
-    const rot = sign * (60 + prand(i + 4) * 80);          // 60‑140 deg
+    const rot = sign * (60 + prand(i + 4) * 80); // 60‑140 deg
     return { clip: makePoly(i), dx, dy, rot };
   });
 };
 
-type Phase = 'welcome' | 'breaking' | 'done';
-const chips = ['About', 'Experience', 'Accolades', 'Hire', 'Contact'];
+type Phase = "welcome" | "breaking" | "done";
+const chips = ["About", "Experience", "Accolades", "Hire", "Contact"];
 
 const introAlreadyPlayed = () =>
-  typeof window !== 'undefined' && sessionStorage.getItem('introPlayed') === 'true';
-
+  typeof window !== "undefined" &&
+  sessionStorage.getItem("introPlayed") === "true";
 
 export default function Home() {
-
-  const [phase, setPhase] = useState<Phase>('welcome');
+  const [phase, setPhase] = useState<Phase>("welcome");
   // deterministic shards (same on server + client)
   const SHARDS = useMemo(buildShards, []);
 
-// skip welcome effect if once played
-useEffect(() => {
+  // skip welcome effect if once played
+  useEffect(() => {
     if (introAlreadyPlayed()) {
-      setPhase('done');
+      setPhase("done");
     }
   }, []);
 
-
   /* ---------------- timeline ---------------- */
   useEffect(() => {
-    if (phase === 'welcome') {
-      const id = setTimeout(() => setPhase('breaking'), 1900);
+    if (phase === "welcome") {
+      const id = setTimeout(() => setPhase("breaking"), 1900);
       return () => clearTimeout(id);
     }
-    if (phase === 'breaking') {
-      const id = setTimeout(() => setPhase('done'), 1400);
+    if (phase === "breaking") {
+      const id = setTimeout(() => setPhase("done"), 1400);
       return () => clearTimeout(id);
     }
   }, [phase]);
 
   /* 5️⃣  once we hit 'done' for the first time, remember it */
   useEffect(() => {
-    if (phase === 'done' && !introAlreadyPlayed()) {
-      sessionStorage.setItem('introPlayed', 'true');
+    if (phase === "done" && !introAlreadyPlayed()) {
+      sessionStorage.setItem("introPlayed", "true");
     }
   }, [phase]);
 
@@ -86,7 +83,7 @@ useEffect(() => {
     <>
       {/* ================= Overlay ================= */}
       <AnimatePresence>
-        {phase !== 'done' && (
+        {phase !== "done" && (
           <motion.div
             key="overlay"
             className="fixed inset-0 z-50 flex items-center justify-center pointer-events-none backdrop-blur-sm"
@@ -102,14 +99,14 @@ useEffect(() => {
                 style={{ clipPath: clip }}
                 initial={{ scale: 1, x: 0, y: 0, rotate: 0 }}
                 animate={
-                  phase === 'breaking'
+                  phase === "breaking"
                     ? {
                         scale: [1, 1.05, 0.8],
                         x: dx,
                         y: dy,
                         rotate: rot,
                         opacity: 0,
-                        transition: { duration: 0.9, ease: 'easeInOut' },
+                        transition: { duration: 0.9, ease: "easeInOut" },
                       }
                     : {}
                 }
@@ -117,11 +114,15 @@ useEffect(() => {
             ))}
 
             {/* welcome text (kept above shards with z-10) */}
-            {phase === 'welcome' && (
+            {phase === "welcome" && (
               <motion.h2
                 initial={{ opacity: 0, scale: 0.85 }}
                 animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 1.05, transition: { duration: 0.4 } }}
+                exit={{
+                  opacity: 0,
+                  scale: 1.05,
+                  transition: { duration: 0.4 },
+                }}
                 className="z-10 select-none text-6xl sm:text-6xl md:text-8xl font-extrabold tracking-widest bg-gradient-to-r from-indigo-900 via-purple-900 to-rose-700 bg-clip-text text-transparent drop-shadow-[0_2px_10px_rgba(0,0,0,0.7)]"
               >
                 Welcome
@@ -132,7 +133,7 @@ useEffect(() => {
       </AnimatePresence>
 
       {/* ================= Hero ================= */}
-      {phase === 'done' && (
+      {phase === "done" && (
         <section className="flex min-h-screen flex-col items-center justify-center gap-6 text-center bg-black dark:bg-black">
           <motion.h1
             initial={{ opacity: 0, y: 30 }}
@@ -165,39 +166,31 @@ useEffect(() => {
               View Projects
             </a>
             <a
-              href="/Resume__Sageena_Garg.pdf"
+              href="/Resume_SageenaGarg.pdf"
               className="rounded border border-pink-700 px-5 py-2 font-medium text-pink-700 hover:bg-blue-50"
             >
               Download Résumé
             </a>
           </motion.div>
 
-          
-
-
-<motion.div
-      initial={{ opacity: 0, y: 10 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ delay: 1.2, duration: 0.6 }}
-      className="flex flex-wrap justify-center gap-3 text-sm"
-    >
-      {chips.map((label) => (
-        <Link
-          key={label}
-          href={`/${label.toLowerCase()}`}     // → /about, /experience, …
-          className="rounded-full border px-3 py-1 text-gray-600 hover:bg-pink-50
+          <motion.div
+            initial={{ opacity: 0, y: 10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ delay: 1.2, duration: 0.6 }}
+            className="flex flex-wrap justify-center gap-3 text-sm"
+          >
+            {chips.map((label) => (
+              <Link
+                key={label}
+                href={`/${label.toLowerCase()}`} // → /about, /experience, …
+                className="rounded-full border px-3 py-1 text-gray-600 hover:bg-pink-50
                      dark:text-gray-300 dark:hover:bg-zinc-800/50"
-        >
-          {label}
-        </Link>
-      ))}
-    </motion.div>
-
-
-
+              >
+                {label}
+              </Link>
+            ))}
+          </motion.div>
         </section>
-
-        
       )}
     </>
   );
