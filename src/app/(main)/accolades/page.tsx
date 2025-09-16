@@ -1,6 +1,6 @@
 "use client";
 import { motion } from "framer-motion";
-import { accolades, Accolade } from "../../../content/accolades";
+import { accolades } from "../../../content/accolades";
 
 export default function AccoladesPage() {
   return (
