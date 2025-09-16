@@ -1,11 +1,8 @@
 'use client';
-
 import { motion } from 'framer-motion';
-
 import {professionalExperiences,
   leadershipExperiences,
   Experience,} from '../../../content/experiences';
-
 export default function ExperiencePage() {
   return (
     <section className="mx-auto max-w-6xl px-4 py-16">
@@ -28,7 +25,8 @@ function Timeline({
 }: {
   title: string;
   items: Experience[];
-}) {
+}) 
+{
   return (
     <div className="mb-16">
       <h2 className="mb-8 text-2xl font-semibold">{title}</h2>
