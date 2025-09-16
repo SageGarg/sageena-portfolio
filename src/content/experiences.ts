@@ -11,7 +11,7 @@ export type Experience = {
 
 export const professionalExperiences: Experience[] = [
   {
-    role: "Data & Web Solutions Intern 5",
+    role: "Data & Web Solutions Intern",
     company: "Netqom Software Pvt. Ltd. ",
     location: "Chandigarh, India",
     dates: "Jul 2025 - Aug 2025",
