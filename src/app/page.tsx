@@ -166,10 +166,10 @@ export default function Home() {
               View Projects
             </a>
             <a
-              href="/Resume_SageenaGarg.pdf"
+              href="/CV_SageenaGarg.pdf"
               className="rounded border border-pink-700 px-5 py-2 font-medium text-pink-700 hover:bg-blue-50"
             >
-              Download Résumé
+              Download CV
             </a>
           </motion.div>
 

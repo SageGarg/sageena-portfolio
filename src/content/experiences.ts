@@ -11,18 +11,6 @@ export type Experience = {
 
 export const professionalExperiences: Experience[] = [
   {
-    role: "Data & Web Solutions Intern",
-    company: "Netqom Software Pvt. Ltd. ",
-    location: "Chandigarh, India",
-    dates: "Jul 2025 - Aug 2025",
-    responsibilities: [
-      "Automated Upwork CSV cleaning with Python, reducing reporting time 75% (8 hrs → 2 hrs).",
-      " Re-built dashboard to visualize proposal win rates, client revenue, and timelines, reducing bid response time by 15%.",
-    ],
-    skills: ["React", "Tableau", "JavaScript", "MySQL"],
-    link: "/projects#signal-verse",
-  },
-  {
     role: "Undergrad Research Assistant",
     company: "Iowa State University Research Park",
     location: "Iowa State University",
@@ -32,6 +20,18 @@ export const professionalExperiences: Experience[] = [
       "Developed Flask microservices and integrated OpenAI APIs",
     ],
     skills: ["Python", "Flask", "LangChain", "MySQL"],
+    link: "/projects#signal-verse",
+  },
+  {
+    role: "Data & Web Solutions Intern",
+    company: "Netqom Software Pvt. Ltd. ",
+    location: "Los Angeles, California",
+    dates: "Jun 2025 - Jul 2025",
+    responsibilities: [
+      "Automated Upwork CSV cleaning with Python, reducing reporting time 75% (8 hrs → 2 hrs).",
+      " Re-built dashboard to visualize proposal win rates, client revenue, and timelines, reducing bid response time by 15%.",
+    ],
+    skills: ["React", "Tableau", "JavaScript", "MySQL"],
     link: "/projects#signal-verse",
   },
   {
