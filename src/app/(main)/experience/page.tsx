@@ -35,13 +35,13 @@ function Timeline({ title, items }: { title: string; items: Experience[] }) {
         {/* spine */}
         <div className="absolute inset-y-0 left-1/2 -translate-x-1/2 w-px bg-gray-200 dark:bg-zinc-700" />
 
-        <div className="flex flex-col">
+        <div className="flex flex-col gap-10">
           {items.map((exp, idx) => {
             const isLeft = idx % 2 === 0;
 
             return (
-              <div key={idx} className="relative py-6 md:min-h-[220px]">
-                {/* dot (centered vertically in this row) */}
+              <div key={idx} className="relative">
+                {/* dot (centered on row) */}
                 <span
                   className="
                     absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2
@@ -50,80 +50,28 @@ function Timeline({ title, items }: { title: string; items: Experience[] }) {
                   "
                 />
 
-                {/* connector (short + close to center) */}
+                {/* connector */}
                 <span
                   className={`
-                    absolute left-1/2 top-1/2 -translate-y-1/2
-                    h-px w-6 bg-gray-200 dark:bg-zinc-700
-                    ${isLeft ? "-translate-x-[calc(100%+8px)]" : "translate-x-2"}
+                    absolute top-1/2 -translate-y-1/2 h-px w-8 bg-gray-200 dark:bg-zinc-700
+                    ${isLeft ? "right-1/2 mr-2" : "left-1/2 ml-2"}
                   `}
                 />
 
                 <div className="grid grid-cols-1 md:grid-cols-2 items-center">
-                  {/* left slot */}
+                  {/* LEFT COLUMN */}
                   <div
-                    className={isLeft ? "md:pr-6 flex justify-end" : "md:pr-6"}
-                  />
-
-                  {/* right slot */}
-                  <div
-                    className={
-                      isLeft ? "md:pl-6" : "md:pl-6 flex justify-start"
-                    }
-                  />
-
-                  {/* card */}
-                  <motion.div
-                    initial={{ opacity: 0, x: isLeft ? -25 : 25 }}
-                    whileInView={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.45 }}
-                    viewport={{ once: true }}
-                    className={`
-                      ${isLeft ? "md:col-start-1 md:justify-self-end" : "md:col-start-2 md:justify-self-start"}
-                      w-full md:max-w-[460px]
-                      bg-white/90 dark:bg-zinc-800/90
-                      p-6 rounded-xl shadow-lg
-                    `}
+                    className={`md:pr-6 ${isLeft ? "flex justify-end" : ""}`}
                   >
-                    <div className="flex items-center justify-between gap-3">
-                      <h3 className="text-xl font-semibold">{exp.role}</h3>
-                      <span className="shrink-0 text-sm font-medium text-pink-700 bg-pink-100 rounded-full px-2 py-1">
-                        {exp.dates}
-                      </span>
-                    </div>
+                    {isLeft && <Card exp={exp} isLeft={isLeft} />}
+                  </div>
 
-                    <div className="mt-1 mb-4 text-gray-600 dark:text-gray-300">
-                      {exp.company} &mdash; {exp.location}
-                    </div>
-
-                    <ul className="mb-4 list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
-                      {exp.responsibilities.map((r, i) => (
-                        <li key={i}>{r}</li>
-                      ))}
-                    </ul>
-
-                    <div className="flex flex-wrap gap-2 mb-4">
-                      {exp.skills.map((s) => (
-                        <span
-                          key={s}
-                          className="rounded-full bg-pink-100 px-3 py-1 text-xs font-medium text-pink-700"
-                        >
-                          {s}
-                        </span>
-                      ))}
-                    </div>
-
-                    {exp.link && (
-                      <a
-                        href={exp.link}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="text-sm font-medium text-pink-700 hover:underline"
-                      >
-                        View Project
-                      </a>
-                    )}
-                  </motion.div>
+                  {/* RIGHT COLUMN */}
+                  <div
+                    className={`md:pl-6 ${!isLeft ? "flex justify-start" : ""}`}
+                  >
+                    {!isLeft && <Card exp={exp} isLeft={isLeft} />}
+                  </div>
                 </div>
               </div>
             );
@@ -131,5 +79,61 @@ function Timeline({ title, items }: { title: string; items: Experience[] }) {
         </div>
       </div>
     </div>
+  );
+}
+
+/** extracted card so we don't duplicate markup */
+function Card({ exp, isLeft }: { exp: Experience; isLeft: boolean }) {
+  return (
+    <motion.div
+      initial={{ opacity: 0, x: isLeft ? -25 : 25 }}
+      whileInView={{ opacity: 1, x: 0 }}
+      transition={{ duration: 0.45 }}
+      viewport={{ once: true }}
+      className="
+        w-full md:max-w-[480px]
+        bg-white/90 dark:bg-zinc-800/90
+        p-6 rounded-xl shadow-lg
+      "
+    >
+      <div className="flex items-center justify-between gap-3">
+        <h3 className="text-xl font-semibold">{exp.role}</h3>
+        <span className="shrink-0 text-sm font-medium text-pink-700 bg-pink-100 rounded-full px-2 py-1">
+          {exp.dates}
+        </span>
+      </div>
+
+      <div className="mt-1 mb-4 text-gray-600 dark:text-gray-300">
+        {exp.company} &mdash; {exp.location}
+      </div>
+
+      <ul className="mb-4 list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">
+        {exp.responsibilities.map((r, i) => (
+          <li key={i}>{r}</li>
+        ))}
+      </ul>
+
+      <div className="flex flex-wrap gap-2 mb-4">
+        {exp.skills.map((s) => (
+          <span
+            key={s}
+            className="rounded-full bg-pink-100 px-3 py-1 text-xs font-medium text-pink-700"
+          >
+            {s}
+          </span>
+        ))}
+      </div>
+
+      {exp.link && (
+        <a
+          href={exp.link}
+          target="_blank"
+          rel="noreferrer"
+          className="text-sm font-medium text-pink-700 hover:underline"
+        >
+          View Project
+        </a>
+      )}
+    </motion.div>
   );
 }
