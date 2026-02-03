@@ -6,12 +6,52 @@ export const Projects = [
         category: "AI",
         title: "SIGNAL VERSE",
         hoverTitle: "Flask based LLM",
-        subTitle:"A Flask-based RAG application: traffic-engineering PDFs are indexed into a MySQL-backed vector store, embeddings retrieve relevant passages, and LangChain uses the OpenAI API to generate answers.",
-     image: "/images/signalverse.png",
+        subTitle:
+          "A Flask-based RAG application: traffic-engineering PDFs are indexed into a MySQL-backed vector store, embeddings retrieve relevant passages, and LangChain uses the OpenAI API to generate answers.",
+        image: "/images/signalverse.png",
         link: "https://github.com/SageGarg/signalVerse",
         demo: "http://trafficsignalverse.com/",
-        stack: ["Python", "Langchain", "MySQL"],
+        stack: ["Python", "Langchain", "MySQL", "RAG"],
       },
+      {
+        category: "AI Research",
+        title: "Traffic Sensor Clearinghouse",
+        hoverTitle: "LLM-Based Sensor Analytics",
+        subTitle:
+          "An AI-enabled clearinghouse that standardizes and centralizes traffic signal sensor test results across states. Verified testing facilities submit schema-compliant reports, which are validated, indexed, and stored in a shared repository. An LLM-powered query interface enables natural-language and structured exploration of sensor performance data to support evidence-based deployment decisions.",
+        image: "/images/traffic-sensor-clearinghouse.png",
+        link: "http://trafficsignalverse.com/nchrp_bp/",
+        demo: "http://trafficsignalverse.com/",
+        stack: [
+          "Python",
+          "Flask",
+          "LLMs",
+          "RAG",
+          "Structured Data Validation",
+          "MySQL",
+          "Access Control",
+        ],
+      },
+
+      {
+        category: "AI",
+        title: "Sim2Video",
+        hoverTitle: "LLM → CARLA → Diffusion",
+        subTitle:
+          "A proof-of-concept AI pipeline that converts natural-language crash descriptions into physics-consistent CARLA simulations and photorealistic synthetic crash videos. The system uses LLMs to structure crash scenarios, executes them with realistic vehicle and pedestrian dynamics, and enhances raw simulation outputs using diffusion-based video realism models.",
+        // image: "/images/synthetic-crash-video.png",
+        link: "https://github.com/SageGarg/sim2video",
+        demo: "",
+        stack: [
+          "Python",
+          "CARLA Simulator",
+          "LLMs",
+          "Diffusion Models",
+          "Computer Vision",
+          "JSON Schemas",
+        ],
+      },
+
       {
         category: "AI + Traffic Engineering",
         title: "CCI Phase 2",
