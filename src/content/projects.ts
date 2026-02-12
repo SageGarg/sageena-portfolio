@@ -1,6 +1,6 @@
 export const Projects = [
   {
-    sectionTitle: "Web Development Projects",
+    sectionTitle: "AI & ML Projects",
     data: [
       {
         category: "AI",
@@ -53,7 +53,7 @@ export const Projects = [
       },
 
       {
-        category: "AI + Traffic Engineering",
+        category: "ML + Traffic Engineering",
         title: "CCI Phase 2",
         hoverTitle: "Automated CV & Analytics Yellow-Light Insight Engine",
         subTitle:
@@ -63,6 +63,22 @@ export const Projects = [
         link: "https://github.com/SageGarg/cciPhase2",
         demo: "",
         stack: ["Python", "OpenCV", "TensorFlow"],
+      },
+    ],
+  },
+  {
+    sectionTitle: "Other Projects",
+    data: [
+      {
+        category: "Web & Full-Stack",
+        title: "MOVIE MAZE",
+        hoverTitle: "Movie Listing Website",
+        subTitle:
+          "A frontend movie directory with search, category filtering (Thriller, Romantic Comedy, Horror), and feedback interface. Built with HTML, CSS, and JavaScript.",
+        link: "https://github.com/SageGarg/MovieMaze", // Replace with your actual GitHub repo link
+        // demo: "https://your-deployed-site-link.com", // Replace with your live demo link if deployed
+        image: "/images/moviemaze.png", // Replace with actual image path you’re using
+        stack: ["HTML", "CSS", "Javascript"],
       },
       {
         category: "Mobile",
@@ -98,17 +114,6 @@ export const Projects = [
         image: "/images/edumart.png", // Replace with your actual image path
         // demo: "https://edumart-demo.vercel.app/", // Replace with your actual deployed demo link
         stack: ["React", "Node.js"],
-      },
-      {
-        category: "Web & Full-Stack",
-        title: "MOVIE MAZE",
-        hoverTitle: "Movie Listing Website",
-        subTitle:
-          "A frontend movie directory with search, category filtering (Thriller, Romantic Comedy, Horror), and feedback interface. Built with HTML, CSS, and JavaScript.",
-        link: "https://github.com/SageGarg/MovieMaze", // Replace with your actual GitHub repo link
-        // demo: "https://your-deployed-site-link.com", // Replace with your live demo link if deployed
-        image: "/images/moviemaze.png", // Replace with actual image path you’re using
-        stack: ["HTML", "CSS", "Javascript"],
       },
     ],
   },
