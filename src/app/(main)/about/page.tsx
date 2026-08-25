@@ -32,11 +32,22 @@ export default function About() {
         <div className="mt-6 md:mt-0">
           <h1 className="text-4xl font-bold">About Me</h1>
           <p className="mt-4 max-w-xl text-gray-700 dark:text-gray-300">
-            I’m Sageena Garg, a junior studying Computer Science at Iowa State
-            University. I work as an undergrad research assistant, where I build
-            AI tools and mobile apps. I’ve made Android projects, full-stack web
-            apps with React and Node.js, and I’m always learning new cloud
-            services to power my work.
+            I'm Sageena Garg, a senior in Computer Science (Honors) at Iowa
+            State University, graduating May 2027. I specialize in AI systems
+            engineering — building the data pipelines, auth architecture, and
+            infrastructure that make AI systems production-ready. <br></br>
+            <br></br>I'm co-founder and primary builder of CyGPT, an AI-powered
+            academic advising platform, and I built a production MCP server with
+            dual-authentication architecture (OAuth + Entra ID) as an IIoT
+            Software Engineering Intern at Grace Technologies. I've also been
+            doing research on RAG pipelines and LLM-based systems for
+            transportation data as an undergrad researcher, which led to my
+            paper SignalVerse: Harnessing LLMs to Revolutionize Traffic Signal
+            Management, accepted for oral presentation at CTRG 2025.<br></br>
+            <br></br>
+            More broadly, I work across Android, full-stack web (React/Node.js),
+            and cloud platforms (AWS, Azure) — with a growing focus on the
+            infrastructure layer that powers AI.
           </p>
         </div>
       </div>
@@ -106,15 +117,15 @@ export default function About() {
         <h2 className="mb-4 text-2xl font-semibold">Education</h2>
         <p className="text-gray-700 dark:text-gray-300">
           B.Sc. Computer Science, Iowa State University &nbsp; &nbsp; &nbsp;
-          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;Expected December 2026
-          • GPA: 3.52 / 4.0
+          &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp; &nbsp;May 2027 • GPA: 3.52 /
+          4.0
         </p>
       </div>
 
       {/* 7. Call to Action */}
       <div className="text-center">
         <a
-          href="/Resume__Sageena_Garg.pdf"
+          href="/Resume__SageenaGarg.pdf"
           className="rounded bg-pink-700 px-6 py-2 text-white hover:bg-pink-600"
         >
           Download Résumé

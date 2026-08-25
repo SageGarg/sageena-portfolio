@@ -11,15 +11,47 @@ export type Experience = {
 
 export const professionalExperiences: Experience[] = [
   {
+    role: "IIoT Software Engineering Intern",
+    company: "Grace Technologies",
+    location: "Davenport, Iowa",
+    dates: "May 2026 – Present",
+    responsibilities: [
+      "Built a production MCP (Model Context Protocol) server with dual-authentication architecture, serving both external customers (OAuth) and internal employees (Entra ID) with tenant-isolated access to IIoT platform data",
+      "Designed the AuthZ engine, tenant isolation layer, and audit logging system enforcing role-based tool access and zero cross-customer data leakage across the MCP tool registry",
+      "Improving OCR-based purchase order extraction and field-validation logic, including structured data mapping and price-tier mismatch detection for an automated order intake pipeline",
+    ],
+    skills: [
+      "Python",
+      "C#",
+      "MCP",
+      "OAuth",
+      "Entra ID",
+      "Azure Functions",
+      "OCR",
+      "Azure",
+    ],
+  },
+  {
     role: "Undergrad Research Assistant",
     company: "Iowa State University Research Park",
-    location: "Iowa State University",
+    location: "Ames, Iowa",
     dates: "Feb 2024 – Present",
     responsibilities: [
-      "Built RAG pipelines with LangChain and MySQL for document Q&A",
-      "Developed Flask microservices and integrated OpenAI APIs",
+      "Designed and implemented RAG (Retrieval-Augmented Generation) pipelines using LLMs and vector embeddings for evidence-grounded querying of domain-specific transportation datasets",
+      "Built structured data ingestion and normalization workflows for tabular and semi-structured data (CSV, Excel, PDF), enabling reliable querying across sensors, testing stages, and locations",
+      "Deployed and maintained a production Flask/LangChain web app on AWS EC2, integrating OpenAI GPT-4 and Chroma for embedding-based similarity search to reduce hallucinations",
     ],
-    skills: ["Python", "Flask", "LangChain", "MySQL"],
+    skills: [
+      "Python",
+      "Flask",
+      "LangChain",
+      "OpenAI GPT-4",
+      "Chroma",
+      "MySQL",
+      "AWS (EC2)",
+      "Tableau",
+      "Power BI",
+    ],
     link: "/projects#signal-verse",
   },
   {
@@ -69,37 +101,65 @@ export const professionalExperiences: Experience[] = [
 
 export const leadershipExperiences: Experience[] = [
   {
-    role: "Social Media Lead",
-    company: "Google DSC, ISU Chapter",
+    role: "Vice President",
+    company: "LAS Student Council, Iowa State University",
     location: "Ames, IA",
-    dates: "Sep 2023 – May 2024",
+    dates: "Aug 2026 – Present",
     responsibilities: [
-      "Doubled engagement (+120%) through targeted campaigns",
-      "Managed a team of 5 and tracked metrics with Google Analytics",
+      "Promoted from Secretary to Vice President after one term",
+      "Lead council initiatives representing the College of Liberal Arts and Sciences student body",
     ],
-    skills: ["Content Strategy", "Analytics", "Figma"],
+    skills: ["Leadership", "Student Governance"],
   },
   {
-    role: "Social Media Lead",
-    company: "Google DSC, ISU Chapter",
+    role: "Director of Technology",
+    company: "180 Degrees Consulting, ISU Chapter",
     location: "Ames, IA",
-    dates: "Sep 2023 – May 2024",
+    dates: "Jan 2026 – Present",
     responsibilities: [
-      "Doubled engagement (+120%) through targeted campaigns",
-      "Managed a team of 5 and tracked metrics with Google Analytics",
+      "Led technology strategy across client consulting engagements, meeting directly with clients to scope needs and manage delivery for two concurrent projects",
+      "Directing a shift toward supporting socially conscious organizations pro bono, expanding the chapter's mission-driven client base",
     ],
-    skills: ["Content Strategy", "Analytics", "Figma"],
+    skills: ["Client Management", "Technical Strategy", "Consulting"],
   },
   {
-    role: "Social Media Lead",
-    company: "Google DSC, ISU Chapter",
+    role: "Appointed Member",
+    company: "LAS Pulse (Dean's Undergraduate Student Advisory Council)",
     location: "Ames, IA",
-    dates: "Sep 2023 – May 2024",
+    dates: "2026-27",
     responsibilities: [
-      "Doubled engagement (+120%) through targeted campaigns",
-      "Managed a team of 5 and tracked metrics with Google Analytics",
+      "Appointed to advise Dean Benjamin Withers and college leadership on student climate, culture, and access within the College of Liberal Arts and Sciences",
     ],
-    skills: ["Content Strategy", "Analytics", "Figma"],
+    skills: ["Advisory", "Student Advocacy"],
   },
-  // …add more leadership roles…
+  {
+    role: "Secretary",
+    company: "LAS Student Council, Iowa State University",
+    location: "Ames, IA",
+    dates: "Jan 2026 – May 2026",
+    responsibilities: [
+      "Managed council records, meeting minutes, and internal communications for the College of Liberal Arts and Sciences student body",
+    ],
+    skills: ["Organization", "Communication"],
+  },
+  {
+    role: "Undergraduate Research Ambassador",
+    company: "Iowa State University",
+    location: "Ames, IA",
+    dates: "2025 – Present",
+    responsibilities: [
+      "Promote undergraduate research opportunities through social media and outreach initiatives",
+    ],
+    skills: ["Outreach", "Social Media"],
+  },
+  {
+    role: "Industry Relations Chair",
+    company: "ISU Data Science Club",
+    location: "Ames, IA",
+    dates: "– Dec 2025",
+    responsibilities: [
+      "Built relationships with 5+ companies and hosted 3 networking events with 50+ attendees",
+    ],
+    skills: ["Industry Relations", "Event Planning"],
+  },
 ];
