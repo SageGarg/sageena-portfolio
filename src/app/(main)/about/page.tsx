@@ -3,13 +3,13 @@ import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
 import { Projects } from "@/content/projects";
+import type { Project } from "@/content/projects";
 
 export default function About() {
   // Flatten all project entries
-  const all = Projects.flatMap((sec) => sec.data);
+  const all: Project[] = Projects.flatMap((sec) => [...sec.data]);
+  const skillMap: Record<string, Project[]> = {};
 
-  // Build skill→project list
-  const skillMap: Record<string, typeof all> = {};
   all.forEach((p) => {
     p.stack.forEach((skill) => {
       (skillMap[skill] ||= []).push(p);

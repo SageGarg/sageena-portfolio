@@ -1,4 +1,21 @@
-export const Projects = [
+export type Project = {
+  category: string;
+  title: string;
+  hoverTitle: string;
+  subTitle: string;
+  image?: string;
+  link: string;
+  demo?: string;
+  stack: string[];
+  notBlank?: boolean;
+};
+
+type ProjectSection = {
+  sectionTitle: string;
+  data: Project[];
+};
+
+export const Projects: ProjectSection[] = [
   {
     sectionTitle: "AI & ML Projects",
     data: [
@@ -41,7 +58,7 @@ export const Projects = [
           "A proof-of-concept AI pipeline that converts natural-language crash descriptions into physics-consistent CARLA simulations and photorealistic synthetic crash videos. The system uses LLMs to structure crash scenarios, executes them with realistic vehicle and pedestrian dynamics, and enhances raw simulation outputs using diffusion-based video realism models.",
         // image: "/images/synthetic-crash-video.png",
         link: "https://github.com/SageGarg/sim2video",
-        demo: "",
+        // demo: "",
         stack: [
           "Python",
           "CARLA Simulator",
@@ -61,7 +78,7 @@ export const Projects = [
 
         // image: "/images/yellowlight.png",
         link: "https://github.com/SageGarg/cciPhase2",
-        demo: "",
+        // demo: "",
         stack: ["Python", "OpenCV", "TensorFlow"],
       },
     ],
@@ -99,7 +116,7 @@ export const Projects = [
           "Full-stack travel-planning platform built with React, Tailwind CSS frontend and Express/MongoDB backend.",
         image: "/images/travelmate-web.png",
         link: "https://github.com/SageGarg/TripAtlas",
-        demo: "",
+        // demo: "",
         stack: ["React", "Tailwind", "MongoDB", "Node.js"],
       },
 
