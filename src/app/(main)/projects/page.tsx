@@ -1,69 +1,122 @@
 "use client";
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { gsap } from "gsap";
 import { Projects } from "@/content/projects";
-import Image from "next/image"; // ✅ use next/image for optimized loading
+import Image from "next/image";
+
+// Tailwind's `md` breakpoint — treat anything narrower as "mobile" (click-to-expand)
+const MOBILE_BREAKPOINT = 768;
+
+function useIsMobile() {
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia(`(max-width: ${MOBILE_BREAKPOINT - 1}px)`);
+    const update = () => setIsMobile(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return isMobile;
+}
 
 export default function ProjectsList() {
+  const isMobile = useIsMobile();
+  // All categories collapsed by default — track open state per section index
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
+
   return (
     <>
-      {Projects.map((project, index) => (
-        <section key={index} className="my-24">
-          <section className="container mx-auto p-4">
-            <h1 className="font-bold text-xl text-primary">
-              {project.sectionTitle}
-            </h1>
+      {Projects.map((project, index) => {
+        const isOpen = openIndex === index;
+
+        // Desktop: hover opens/closes. Mobile: click toggles.
+        const hoverHandlers = !isMobile
+          ? {
+              onMouseEnter: () => setOpenIndex(index),
+              onMouseLeave: () =>
+                setOpenIndex((curr) => (curr === index ? null : curr)),
+            }
+          : {};
+
+        const clickHandler = isMobile
+          ? {
+              onClick: () =>
+                setOpenIndex((curr) => (curr === index ? null : index)),
+            }
+          : {};
+
+        return (
+          <section key={index} className="my-8">
+            <section
+              className="container mx-auto p-4 cursor-pointer select-none flex items-center justify-between"
+              {...hoverHandlers}
+              {...clickHandler}
+            >
+              <h1 className="font-bold text-xl text-primary">
+                {project.sectionTitle}
+              </h1>
+              <span
+                className={`transition-transform duration-300 text-primary ${
+                  isOpen ? "rotate-180" : "rotate-0"
+                }`}
+                aria-hidden="true"
+              >
+                ▾
+              </span>
+            </section>
+
+            {/* Category body: hover keeps it open on desktop since the mouse
+                is still within this section's bounding box */}
+            <div
+              {...(!isMobile ? hoverHandlers : {})}
+              className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
+                isOpen ? "max-h-[5000px] opacity-100" : "max-h-0 opacity-0"
+              }`}
+            >
+              {project.data.map((val, key) => (
+                <Comp key={key} val={val} active={isOpen} />
+              ))}
+            </div>
           </section>
-          {project.data.map((val, key) => (
-            <Comp key={key} val={val} />
-          ))}
-        </section>
-      ))}
+        );
+      })}
     </>
   );
 }
 
 function Comp(props: {
-  val:
-    | {
-        title: string;
-        hoverTitle: string;
-        subTitle: string;
-        notBlank?: boolean;
-        link: string;
-        image?: string;
-        demo?: string;
-      }
-    | {
-        title: string;
-        hoverTitle: string;
-        link: string;
-        notBlank?: boolean;
-        subTitle?: undefined;
-        image?: string;
-        demo?: string;
-      };
+  val: {
+    title: string;
+    hoverTitle: string;
+    subTitle?: string;
+    notBlank?: boolean;
+    link: string;
+    image?: string;
+    demo?: string;
+  };
+  active: boolean;
 }) {
   const compRef = useRef<HTMLAnchorElement>(null);
+  const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
+    // Only animate in the first time a section becomes active/visible,
+    // so re-opening an already-seen category doesn't re-trigger the slide-in.
+    if (!props.active || hasAnimatedRef.current || !compRef.current) return;
+    hasAnimatedRef.current = true;
+
     const ctx = gsap.context(() => {
       gsap.from(compRef.current, {
         yPercent: 100,
         opacity: 0,
         ease: "power4.out",
         duration: 1,
-        scrollTrigger: {
-          trigger: compRef.current,
-          start: "top 100%",
-          end: "bottom top",
-          // scrub: true,
-          // markers: true,
-        },
       });
     });
-    return () => ctx.revert(); // cleanup
-  }, []);
+    return () => ctx.revert();
+  }, [props.active]);
 
   return (
     <a

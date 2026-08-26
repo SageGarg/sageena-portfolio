@@ -2,19 +2,50 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
+import { Projects } from "@/content/projects";
 import {
   professionalExperiences,
   type Experience,
 } from "@/content/experiences";
 
-export default function About() {
-  const skillMap: Record<string, Experience[]> = {};
+type SkillUsage = {
+  label: string;
+  href: string;
+};
 
-  professionalExperiences.forEach((experience) => {
-    experience.skills.forEach((skill) => {
-      (skillMap[skill] ||= []).push(experience);
+export default function About() {
+  const skillMap: Record<string, SkillUsage[]> = {};
+
+  const addSkill = (skill: string, usage: SkillUsage) => {
+    const usages = skillMap[skill] || (skillMap[skill] = []);
+    if (!usages.some((item) => item.label === usage.label)) {
+      usages.push(usage);
+    }
+  };
+
+  Projects.forEach((section) => {
+    section.data.forEach((project) => {
+      project.stack.forEach((skill) => {
+        if (project.link) {
+          addSkill(skill, {
+            label: project.title,
+            href: project.link,
+          });
+        }
+      });
     });
   });
+
+  professionalExperiences
+    .filter((experience) => experience.role !== "Student Office Assistant")
+    .forEach((experience) => {
+      experience.skills.forEach((skill) => {
+        addSkill(skill, {
+          label: `${experience.role} - ${experience.company}`,
+          href: experience.link ?? "/experience",
+        });
+      });
+    });
 
   const [openSkill, setOpenSkill] = useState<string | null>(null);
   return (
@@ -32,29 +63,20 @@ export default function About() {
         <div className="mt-6 md:mt-0">
           <h1 className="text-4xl font-bold">About Me</h1>
           <p className="mt-4 max-w-xl text-gray-700 dark:text-gray-300">
-            I'm Sageena Garg, a senior in Computer Science (Honors) at Iowa
-            State University, graduating May 2027. I specialize in AI systems
-            engineering — building the data pipelines, auth architecture, and
-            infrastructure that make AI systems production-ready. <br></br>
-            <br></br>I'm co-founder and primary builder of CyGPT, an AI-powered
-            academic advising platform, and I built a production MCP server with
-            dual-authentication architecture (OAuth + Entra ID) as an IIoT
-            Software Engineering Intern at Grace Technologies. I've also been
-            doing research on RAG pipelines and LLM-based systems for
-            transportation data as an undergrad researcher, which led to my
-            paper SignalVerse: Harnessing LLMs to Revolutionize Traffic Signal
-            Management, accepted for oral presentation at CTRG 2025.<br></br>
-            <br></br>
-            More broadly, I work across Android, full-stack web (React/Node.js),
-            and cloud platforms (AWS, Azure) — with a growing focus on the
-            infrastructure layer that powers AI.
+            I'm Sageena Garg, building the infrastructure layer for AI systems —
+            auth architectures, agentic pipelines, and data layers that let AI
+            move from prototype to production. I'm the co-founder and primary
+            builder of CyGPT and built a production dual-auth MCP server at
+            Grace Technologies. Currently a CS senior at Iowa State (May 2027),
+            shipping systems and chasing the frontier of what AI infrastructure
+            can do.
           </p>
         </div>
       </div>
 
       {/* Interactive Skills & Proof */}
       <div className="mt-12">
-        <h2 className="mb-6 text-2xl font-semibold">Professional Skill Set</h2>
+        <h2 className="mb-6 text-2xl font-semibold">Technical Skill Set</h2>
         <div className="flex flex-wrap gap-4">
           {Object.entries(skillMap).map(([skill, list]) => {
             const isOpen = openSkill === skill;
@@ -92,13 +114,23 @@ export default function About() {
                         Used in:
                       </p>
                       <ul className="mt-2 space-y-1 text-sm">
-                        {list.map((experience) => (
-                          <li key={`${experience.role}-${experience.company}`}>
+                        {list.map((usage) => (
+                          <li key={usage.label}>
                             <Link
-                              href={experience.link ?? "/experience"}
+                              href={usage.href}
+                              target={
+                                usage.href.startsWith("http")
+                                  ? "_blank"
+                                  : undefined
+                              }
+                              rel={
+                                usage.href.startsWith("http")
+                                  ? "noreferrer"
+                                  : undefined
+                              }
                               className="text-pink-700 hover:underline"
                             >
-                              {experience.role} - {experience.company}
+                              {usage.label}
                             </Link>
                           </li>
                         ))}
