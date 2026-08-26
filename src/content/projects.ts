@@ -21,6 +21,35 @@ export const Projects: ProjectSection[] = [
     data: [
       {
         category: "AI",
+        title: "CyGPT",
+        hoverTitle: "AI advisor for ISU",
+        subTitle:
+          "A GPT-style conversational assistant for Iowa State University: RAG over scraped university data answers academic, administrative, and campus queries, with an end-to-end pipeline for scraping, embedding, and contextual response generation.",
+        image: "/images/CyGPT.png",
+        link: "https://github.com/SageGarg/CyGPT",
+        demo: "",
+        stack: [
+          "Python",
+          "LangChain",
+          "OpenAI API",
+          "Chroma",
+          "FAISS",
+          "Flask",
+        ],
+      },
+      {
+        category: "AI",
+        title: "ANSWERLYTICS",
+        hoverTitle: "AI interview coach",
+        subTitle:
+          "An agentic interview coaching pipeline built with LangGraph: transcribes spoken answers via Whisper, evaluates content and delivery against resume context, and generates recruiter-style feedback grounded in a RAG layer over real interview experiences.",
+        image: "/images/answerlytics.png",
+        link: "https://github.com/SageGarg/Answerlytics",
+        demo: "",
+        stack: ["Python", "LangGraph", "Whisper", "ChromaDB", "FAISS"],
+      },
+      {
+        category: "AI",
         title: "SIGNAL VERSE",
         hoverTitle: "Flask based LLM",
         subTitle:
