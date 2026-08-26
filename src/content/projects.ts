@@ -27,7 +27,7 @@ export const Projects: ProjectSection[] = [
           "A Flask-based RAG application: traffic-engineering PDFs are indexed into a MySQL-backed vector store, embeddings retrieve relevant passages, and LangChain uses the OpenAI API to generate answers.",
         image: "/images/signalverse.png",
         link: "https://github.com/SageGarg/signalVerse",
-        demo: "http://trafficsignalverse.com/",
+        demo: "http://test.trafficsignalverse.com/",
         stack: ["Python", "Langchain", "MySQL", "RAG"],
       },
       {
@@ -37,8 +37,8 @@ export const Projects: ProjectSection[] = [
         subTitle:
           "An AI-enabled clearinghouse that standardizes and centralizes traffic signal sensor test results across states. Verified testing facilities submit schema-compliant reports, which are validated, indexed, and stored in a shared repository. An LLM-powered query interface enables natural-language and structured exploration of sensor performance data to support evidence-based deployment decisions.",
         image: "/images/traffic-sensor-clearinghouse.png",
-        link: "http://trafficsignalverse.com/nchrp_bp/",
-        demo: "http://trafficsignalverse.com/",
+        link: "http://test.trafficsignalverse.com/nchrp_bp/",
+        demo: "http://test.trafficsignalverse.com/nchrp_bp/",
         stack: [
           "Python",
           "Flask",
