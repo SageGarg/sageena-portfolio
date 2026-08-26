@@ -2,17 +2,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { motion, AnimatePresence } from "framer-motion";
-import { Projects } from "@/content/projects";
-import type { Project } from "@/content/projects";
+import {
+  professionalExperiences,
+  type Experience,
+} from "@/content/experiences";
 
 export default function About() {
-  // Flatten all project entries
-  const all: Project[] = Projects.flatMap((sec) => [...sec.data]);
-  const skillMap: Record<string, Project[]> = {};
+  const skillMap: Record<string, Experience[]> = {};
 
-  all.forEach((p) => {
-    p.stack.forEach((skill) => {
-      (skillMap[skill] ||= []).push(p);
+  professionalExperiences.forEach((experience) => {
+    experience.skills.forEach((skill) => {
+      (skillMap[skill] ||= []).push(experience);
     });
   });
 
@@ -54,7 +54,7 @@ export default function About() {
 
       {/* Interactive Skills & Proof */}
       <div className="mt-12">
-        <h2 className="mb-6 text-2xl font-semibold">Skill Set</h2>
+        <h2 className="mb-6 text-2xl font-semibold">Professional Skill Set</h2>
         <div className="flex flex-wrap gap-4">
           {Object.entries(skillMap).map(([skill, list]) => {
             const isOpen = openSkill === skill;
@@ -92,13 +92,13 @@ export default function About() {
                         Used in:
                       </p>
                       <ul className="mt-2 space-y-1 text-sm">
-                        {list.map((p) => (
-                          <li key={p.title}>
+                        {list.map((experience) => (
+                          <li key={`${experience.role}-${experience.company}`}>
                             <Link
-                              href={`/projects#${p.title.toLowerCase().replace(/\s+/g, "-")}`}
+                              href={experience.link ?? "/experience"}
                               className="text-pink-700 hover:underline"
                             >
-                              {p.title}
+                              {experience.role} - {experience.company}
                             </Link>
                           </li>
                         ))}
