@@ -27,11 +27,11 @@ export default function ProjectsList() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <>
+    <div className="container mx-auto px-4 py-16">
       {Projects.map((project, index) => {
         const isOpen = openIndex === index;
+        const count = project.data.length;
 
-        // Desktop: hover opens/closes. Mobile: click toggles.
         const hoverHandlers = !isMobile
           ? {
               onMouseEnter: () => setOpenIndex(index),
@@ -48,27 +48,55 @@ export default function ProjectsList() {
           : {};
 
         return (
-          <section key={index} className="my-8">
-            <section
-              className="container mx-auto p-4 cursor-pointer select-none flex items-center justify-between"
+          <section
+            key={index}
+            className="overflow-hidden border-t border-zinc-800/80 first:border-t-0"
+          >
+            {/* Header — always visible, styled as a real card row so it never looks blank */}
+            <div
+              className="group/category relative flex cursor-pointer select-none items-center justify-between px-2 py-8 transition-colors duration-300 hover:bg-white/[0.025] md:px-4"
               {...hoverHandlers}
               {...clickHandler}
             >
-              <h1 className="font-bold text-xl text-primary">
-                {project.sectionTitle}
-              </h1>
+              <span className="absolute left-0 top-0 h-px w-16 bg-pink-500 transition-all duration-300 group-hover/category:w-28" />
+              <div className="flex items-center gap-3">
+                <h1 className="text-lg font-bold text-white md:text-2xl">
+                  {project.sectionTitle}
+                </h1>
+                <span className="text-xs font-medium text-pink-400 md:text-sm">
+                  /
+                </span>
+                <span className="text-xs font-medium text-zinc-500 md:text-sm">
+                  {count} {count === 1 ? "project" : "projects"}
+                </span>
+              </div>
               <span
-                className={`transition-transform duration-300 text-primary ${
+                className={`text-xl text-zinc-500 transition-transform duration-300 ${
                   isOpen ? "rotate-180" : "rotate-0"
                 }`}
                 aria-hidden="true"
               >
                 ▾
               </span>
-            </section>
+            </div>
 
-            {/* Category body: hover keeps it open on desktop since the mouse
-                is still within this section's bounding box */}
+            {/* Collapsed preview strip — stack tags peek out so the card never reads as empty */}
+            {!isOpen && (
+              <div className="flex flex-wrap gap-x-4 gap-y-2 px-2 pb-7 md:px-4">
+                {Array.from(new Set(project.data.flatMap((p) => p.stack)))
+                  .slice(0, 6)
+                  .map((tech) => (
+                    <span
+                      key={tech}
+                      className="text-[10px] text-zinc-500 before:mr-2 before:text-pink-500 before:content-['•'] md:text-xs"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+              </div>
+            )}
+
+            {/* Expanded body */}
             <div
               {...(!isMobile ? hoverHandlers : {})}
               className={`overflow-hidden transition-[max-height,opacity] duration-500 ease-in-out ${
@@ -82,7 +110,7 @@ export default function ProjectsList() {
           </section>
         );
       })}
-    </>
+    </div>
   );
 }
 
@@ -102,8 +130,6 @@ function Comp(props: {
   const hasAnimatedRef = useRef(false);
 
   useEffect(() => {
-    // Only animate in the first time a section becomes active/visible,
-    // so re-opening an already-seen category doesn't re-trigger the slide-in.
     if (!props.active || hasAnimatedRef.current || !compRef.current) return;
     hasAnimatedRef.current = true;
 
@@ -121,21 +147,23 @@ function Comp(props: {
   return (
     <a
       ref={compRef}
-      href={props.val.link}
+      href={props.val.link || undefined}
       target={props.val.notBlank ? "" : "_blank"}
-      className="info-tile px-4 md:px-8 block overflow-hidden group border-b-2 border-text/10 cursor-pointer relative after:absolute after:w-full after:h-full after:top-0 after:left-0 after:bg-pink-700 after:origin-bottom hover:after:origin-top after:-z-10 after:duration-500 after:transition-transform after:scale-y-0 hover:after:scale-y-100"
+      className={`info-tile group relative block overflow-hidden border-b border-zinc-800/70 px-2 md:px-4 after:absolute after:left-0 after:top-0 after:-z-10 after:h-full after:w-full after:origin-bottom after:scale-y-0 after:bg-pink-700 after:transition-transform after:duration-500 hover:after:origin-top hover:after:scale-y-100 ${
+        props.val.link ? "cursor-pointer" : "cursor-default"
+      }`}
     >
-      <div className="container relative mx-auto flex justify-between items-center">
+      <div className="relative flex justify-between items-center">
         {/* Left section: Title & Hover Title */}
         <div className="h-full flex-1 relative overflow-hidden">
-          <h1 className="text-xl md:text-5xl lg:text-7xl font-bold tracking-tighter py-12 transition-transform duration-500 group-hover:-translate-y-full">
+          <h1 className="py-10 text-xl font-bold tracking-tighter transition-transform duration-500 group-hover:-translate-y-full md:py-12 md:text-4xl lg:py-12 lg:text-5xl">
             {props.val.title}
           </h1>
           <div className="absolute inset-0 flex flex-col justify-center translate-y-full transition-transform duration-500 group-hover:translate-y-0">
-            <h1 className="text-xl md:text-5xl lg:text-7xl font-bold tracking-tighter">
+            <h1 className="text-xl font-bold tracking-tighter md:text-4xl lg:text-5xl">
               {props.val.title}
             </h1>
-            <h2 className="text-lg md:text-2xl lg:text-3xl font-medium opacity-70">
+            <h2 className="text-base font-medium opacity-70 md:text-xl lg:text-2xl">
               {props.val.hoverTitle}
             </h2>
           </div>
@@ -147,9 +175,9 @@ function Comp(props: {
             <div
               onClick={(e) => {
                 e.stopPropagation();
-                window.open(props.val.demo, "_blank");
+                if (props.val.demo) window.open(props.val.demo, "_blank");
               }}
-              className="w-48 h-24 md:h-32 lg:h-28 overflow-hidden opacity-0 group-hover:opacity-100 transition-opacity duration-500 cursor-pointer relative"
+              className="relative h-20 w-40 cursor-pointer overflow-hidden rounded opacity-0 transition-opacity duration-500 group-hover:opacity-100 md:h-28 lg:h-24"
             >
               <Image
                 src={props.val.image}
@@ -159,7 +187,7 @@ function Comp(props: {
               />
             </div>
           )}
-          <p className="text-text/70 opacity-0 group-hover:opacity-70 transition-opacity duration-500 text-xs md:text-base max-w-xs lg:max-w-md">
+          <p className="max-w-xs text-xs text-zinc-950 opacity-0 transition-opacity duration-500 group-hover:opacity-80 md:text-sm lg:max-w-md">
             {props.val.subTitle}
           </p>
         </div>

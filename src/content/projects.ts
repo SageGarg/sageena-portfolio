@@ -17,7 +17,7 @@ type ProjectSection = {
 
 export const Projects: ProjectSection[] = [
   {
-    sectionTitle: "AI & ML Projects",
+    sectionTitle: "AI & Agentic Products",
     data: [
       {
         category: "AI",
@@ -48,6 +48,11 @@ export const Projects: ProjectSection[] = [
         demo: "",
         stack: ["Python", "LangGraph", "Whisper", "ChromaDB", "FAISS"],
       },
+    ],
+  },
+  {
+    sectionTitle: "AI Research & Applied ML",
+    data: [
       {
         category: "AI",
         title: "SIGNAL VERSE",
@@ -78,16 +83,13 @@ export const Projects: ProjectSection[] = [
           "Access Control",
         ],
       },
-
       {
         category: "AI",
         title: "Sim2Video",
         hoverTitle: "LLM → CARLA → Diffusion",
         subTitle:
           "A proof-of-concept AI pipeline that converts natural-language crash descriptions into physics-consistent CARLA simulations and photorealistic synthetic crash videos. The system uses LLMs to structure crash scenarios, executes them with realistic vehicle and pedestrian dynamics, and enhances raw simulation outputs using diffusion-based video realism models.",
-        // image: "/images/synthetic-crash-video.png",
         link: "https://github.com/SageGarg/sim2video",
-        // demo: "",
         stack: [
           "Python",
           "CARLA Simulator",
@@ -97,23 +99,19 @@ export const Projects: ProjectSection[] = [
           "JSON Schemas",
         ],
       },
-
       {
         category: "ML + Traffic Engineering",
         title: "CCI Phase 2",
         hoverTitle: "Automated CV & Analytics Yellow-Light Insight Engine",
         subTitle:
           "OpenCV-driven yellow-light detection, multi-camera clip stitching, and polynomial regression on vehicle trajectories to optimize signal timing and improve intersection safety.",
-
-        // image: "/images/yellowlight.png",
         link: "https://github.com/SageGarg/cciPhase2",
-        // demo: "",
         stack: ["Python", "OpenCV", "TensorFlow"],
       },
     ],
   },
   {
-    sectionTitle: "Other Projects",
+    sectionTitle: "Full-Stack & Web",
     data: [
       {
         category: "Web & Full-Stack",
@@ -121,9 +119,8 @@ export const Projects: ProjectSection[] = [
         hoverTitle: "Movie Listing Website",
         subTitle:
           "A frontend movie directory with search, category filtering (Thriller, Romantic Comedy, Horror), and feedback interface. Built with HTML, CSS, and JavaScript.",
-        link: "https://github.com/SageGarg/MovieMaze", // Replace with your actual GitHub repo link
-        // demo: "https://your-deployed-site-link.com", // Replace with your live demo link if deployed
-        image: "/images/moviemaze.png", // Replace with actual image path you’re using
+        link: "https://github.com/SageGarg/MovieMaze",
+        image: "/images/moviemaze.png",
         stack: ["HTML", "CSS", "Javascript"],
       },
       {
@@ -137,6 +134,32 @@ export const Projects: ProjectSection[] = [
         stack: ["PHP", "WordPress", "MySQL", "Docker", "JavaScript"],
       },
       {
+        category: "Web & Full-Stack",
+        title: "TRIP ATLAS WEB",
+        hoverTitle: "Full-Stack Travel Website",
+        subTitle:
+          "Full-stack travel-planning platform built with React, Tailwind CSS frontend and Express/MongoDB backend.",
+        image: "/images/travelmate-web.png",
+        link: "https://github.com/SageGarg/TripAtlas",
+        stack: ["React", "Tailwind", "MongoDB", "Node.js"],
+      },
+      {
+        category: "Web & Full-Stack",
+        title: "EDU MART",
+        hoverTitle: "Course Catalog Web App",
+        subTitle:
+          "A React-based course shopping platform with search, filtering, cart, and payment flow (frontend only, no backend).",
+        notBlank: true,
+        link: "https://github.com/SageGarg/EduMart",
+        image: "/images/edumart.png",
+        stack: ["React", "Node.js"],
+      },
+    ],
+  },
+  {
+    sectionTitle: "Mobile",
+    data: [
+      {
         category: "Mobile",
         title: "TRAVELMATE APP",
         hoverTitle: "Android Trip Planner",
@@ -146,30 +169,6 @@ export const Projects: ProjectSection[] = [
         link: "https://github.com/SageGarg/TravelMateApp",
         demo: "https://youtu.be/yBcNq37_ZDU?si=3br8Pv1m8-LNQzIl",
         stack: ["Java", "Android SDK", "Firebase Authentication"],
-      },
-      {
-        category: "Web & Full-Stack",
-        title: "TRIP ATLAS WEB",
-        hoverTitle: "Full-Stack Travel Website",
-        subTitle:
-          "Full-stack travel-planning platform built with React, Tailwind CSS frontend and Express/MongoDB backend.",
-        image: "/images/travelmate-web.png",
-        link: "https://github.com/SageGarg/TripAtlas",
-        // demo: "",
-        stack: ["React", "Tailwind", "MongoDB", "Node.js"],
-      },
-
-      {
-        category: "Web & Full-Stack",
-        title: "EDU MART",
-        hoverTitle: "Course Catalog Web App",
-        subTitle:
-          "A React-based course shopping platform with search, filtering, cart, and payment flow (frontend only, no backend).",
-        notBlank: true,
-        link: "https://github.com/SageGarg/EduMart",
-        image: "/images/edumart.png", // Replace with your actual image path
-        // demo: "https://edumart-demo.vercel.app/", // Replace with your actual deployed demo link
-        stack: ["React", "Node.js"],
       },
     ],
   },
