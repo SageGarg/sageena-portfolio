@@ -104,7 +104,7 @@ function Card({ exp, isLeft }: { exp: Experience; isLeft: boolean }) {
       </div>
 
       <div className="mt-1 mb-4 text-gray-600 dark:text-gray-300">
-        {exp.company} &mdash; {exp.location}
+        {exp.company} | {exp.location}
       </div>
 
       <ul className="mb-4 list-disc list-inside space-y-2 text-gray-700 dark:text-gray-300">

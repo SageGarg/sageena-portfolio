@@ -26,14 +26,14 @@ export default function Hire() {
     <section className="mx-auto max-w-5xl px-6 py-20 md:py-28">
       <div className="max-w-3xl">
         <p className="mb-4 text-sm font-semibold uppercase tracking-[0.2em] text-pink-400">
-          Open to meaningful work
+          Looking for meaningful collaboration
         </p>
         <h1 className="text-5xl font-bold tracking-tight text-white md:text-7xl">
           Let&apos;s build something useful.
         </h1>
         <p className="mt-6 max-w-2xl text-lg leading-relaxed text-zinc-300">
-          I&apos;m a Computer Science honors student focused on production-ready
-          AI systems, cloud infrastructure, and full-stack products. I bring
+          I&apos;m a Computer Science student focused on production-ready AI
+          systems, cloud infrastructure, and full-stack products. I bring
           research depth, practical engineering, and a bias toward clear
           solutions.
         </p>
@@ -46,7 +46,7 @@ export default function Hire() {
             Start a conversation
           </Link>
           <a
-            href="/Resume_SageenaGarg.pdf"
+            href="/resume.pdf"
             download
             className="inline-flex items-center gap-2 rounded border border-zinc-600 px-5 py-3 font-semibold text-white transition hover:border-pink-400 hover:text-pink-300"
           >

@@ -16,8 +16,8 @@ type SkillUsage = {
 export default function About() {
   const skillMap: Record<string, SkillUsage[]> = {};
 
-  const addSkill = (skill: string, usage: SkillUsage) => {
-    const usages = skillMap[skill] || (skillMap[skill] = []);
+  const addSkill = (rawSkill: string, usage: SkillUsage) => {
+    const usages = skillMap[rawSkill] || (skillMap[rawSkill] = []);
     if (!usages.some((item) => item.label === usage.label)) {
       usages.push(usage);
     }
@@ -26,12 +26,10 @@ export default function About() {
   Projects.forEach((section) => {
     section.data.forEach((project) => {
       project.stack.forEach((skill) => {
-        if (project.link) {
-          addSkill(skill, {
-            label: project.title,
-            href: project.link,
-          });
-        }
+        addSkill(skill, {
+          label: project.title,
+          href: project.link || "/projects",
+        });
       });
     });
   });
@@ -63,7 +61,7 @@ export default function About() {
         <div className="mt-6 md:mt-0">
           <h1 className="text-4xl font-bold">About Me</h1>
           <p className="mt-4 max-w-xl text-gray-700 dark:text-gray-300">
-            I'm Sageena Garg, building the infrastructure layer for AI systems —
+            I'm Sageena Garg, building the infrastructure layer for AI systems,
             auth architectures, agentic pipelines, and data layers that let AI
             move from prototype to production. I'm the co-founder and primary
             builder of CyGPT and built a production dual-auth MCP server at
@@ -109,7 +107,6 @@ export default function About() {
                         className="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 
                                     w-3 h-3 rotate-45 bg-white dark:bg-zinc-800"
                       />
-
                       <p className="text-xs font-medium text-gray-500 dark:text-gray-400">
                         Used in:
                       </p>
@@ -157,7 +154,7 @@ export default function About() {
       {/* 7. Call to Action */}
       <div className="text-center">
         <a
-          href="/Resume__SageenaGarg.pdf"
+          href="/resume.pdf"
           className="rounded bg-pink-700 px-6 py-2 text-white hover:bg-pink-600"
         >
           Download Résumé

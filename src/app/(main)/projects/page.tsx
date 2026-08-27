@@ -104,7 +104,7 @@ export default function ProjectsList() {
               }`}
             >
               {project.data.map((val, key) => (
-                <Comp key={key} val={val} active={isOpen} />
+                <Comp key={key} val={val} active={isOpen} isMobile={isMobile} />
               ))}
             </div>
           </section>
@@ -125,6 +125,7 @@ function Comp(props: {
     demo?: string;
   };
   active: boolean;
+  isMobile: boolean;
 }) {
   const compRef = useRef<HTMLAnchorElement>(null);
   const hasAnimatedRef = useRef(false);
@@ -153,13 +154,29 @@ function Comp(props: {
         props.val.link ? "cursor-pointer" : "cursor-default"
       }`}
     >
-      <div className="relative flex justify-between items-center">
+      <div
+        className={`relative flex items-start ${
+          props.isMobile ? "flex-col gap-2" : "justify-between items-center"
+        }`}
+      >
         {/* Left section: Title & Hover Title */}
-        <div className="h-full flex-1 relative overflow-hidden">
-          <h1 className="py-10 text-xl font-bold tracking-tighter transition-transform duration-500 group-hover:-translate-y-full md:py-12 md:text-4xl lg:py-12 lg:text-5xl">
+        <div className="relative h-full w-full flex-1 overflow-hidden">
+          <h1
+            className={`py-10 text-xl font-bold tracking-tighter md:py-12 md:text-4xl lg:py-12 lg:text-5xl ${
+              props.isMobile
+                ? ""
+                : "transition-transform duration-500 group-hover:-translate-y-full"
+            }`}
+          >
             {props.val.title}
           </h1>
-          <div className="absolute inset-0 flex flex-col justify-center translate-y-full transition-transform duration-500 group-hover:translate-y-0">
+          <div
+            className={`absolute inset-0 flex-col justify-center ${
+              props.isMobile
+                ? "hidden"
+                : "flex translate-y-full transition-transform duration-500 group-hover:translate-y-0"
+            }`}
+          >
             <h1 className="text-xl font-bold tracking-tighter md:text-4xl lg:text-5xl">
               {props.val.title}
             </h1>
@@ -170,7 +187,11 @@ function Comp(props: {
         </div>
 
         {/* Right section: Image and Subtitle */}
-        <div className="flex items-center gap-4">
+        <div
+          className={`flex gap-4 ${
+            props.isMobile ? "w-full flex-col items-start" : "items-center"
+          }`}
+        >
           {props.val.image && (
             <div
               onClick={(e) => {
@@ -187,7 +208,13 @@ function Comp(props: {
               />
             </div>
           )}
-          <p className="max-w-xs text-xs text-zinc-950 opacity-0 transition-opacity duration-500 group-hover:opacity-80 md:text-sm lg:max-w-md">
+          <p
+            className={`max-w-xs text-xs transition-opacity duration-500 md:text-sm lg:max-w-md ${
+              props.isMobile
+                ? "text-zinc-300 opacity-100"
+                : "text-zinc-950 opacity-0 group-hover:opacity-80"
+            }`}
+          >
             {props.val.subTitle}
           </p>
         </div>

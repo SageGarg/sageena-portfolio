@@ -11,11 +11,11 @@ export default function Contact() {
             Contact
           </p>
           <h1 className="text-5xl font-bold tracking-tight text-white md:text-7xl">
-            Have a project in mind?
+            Let's connect
           </h1>
           <p className="mt-6 max-w-xl text-lg leading-relaxed text-zinc-300">
-            I&apos;d love to hear what you&apos;re working on, what needs
-            solving, or where you think we could collaborate.
+            Whether it's a job opportunity, a project, or just building
+            something together, I'd love to hear from you.
           </p>
         </div>
 
@@ -36,7 +36,7 @@ export default function Contact() {
             <span aria-hidden="true">↗</span>
           </a>
           <a
-            href="/Resume_SageenaGarg.pdf"
+            href="/resume.pdf"
             className="flex items-center gap-3 rounded border border-zinc-800 px-4 py-3 text-zinc-200 transition hover:border-pink-400 hover:text-pink-300"
           >
             <Mail size={19} /> Resume and experience
