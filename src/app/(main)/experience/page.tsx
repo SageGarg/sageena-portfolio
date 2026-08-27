@@ -87,9 +87,8 @@ function Card({ exp, isLeft }: { exp: Experience; isLeft: boolean }) {
   return (
     <motion.div
       initial={{ opacity: 0, x: isLeft ? -25 : 25 }}
-      whileInView={{ opacity: 1, x: 0 }}
+      animate={{ opacity: 1, x: 0 }}
       transition={{ duration: 0.45 }}
-      viewport={{ once: true }}
       className="
         w-full md:max-w-[480px]
         bg-white/90 dark:bg-zinc-800/90
